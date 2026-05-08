@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Agency | We Build Websites That Bring Customer's</title>
+    <meta name="google-site-verification" content="pPoHVBWIj32eubSdbe_HsdibiXza1IpWQZLzOjd5w"/>
+    <meta name="description"
+    content="Professional Website Development Services. Get a Smart Instant Price And Launch Your Business Online Today.">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+       * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: Inter, sans-serif;
+        }
+    body {
+        background: #0b1220;
+        color:white;
+    }
+    .hero {
+        padding: 80px 20px;
+        text-align: center;
+        background: radial-gradient(circle at top, #1e3a8a, #0b1220);
+    }
+    .hero h1 {
+     font-size: 42px;
+     font-weight: 800;
+     color: #38bdf8;
+    }
+    .hero p {
+        margin-top: 15px;
+        font-size: 18px;
+        color: #cbd5e1;
+    }
+    .cta {
+        margin-top: 25px;
+        display: inline-block;
+        padding: 15px 30px;
+        background: #22c55e;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 40px 20px;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap:20px;
+    }
+    .card {
+        background: #111827;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #1f2937;
+    }
+    .tool {
+        margin-top: 50px;
+        background: #111827;
+        padding: 30px;
+        border-radius: 15px;
+        border: 1px solid #1f2937;
+    }
+    textarea {
+        width: 100%;
+        height: 120px;
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        margin-top: 15px;
+        font-size: 15px;
+    }
+    .price {
+        margin-top: 20px;
+        font-size: 28px;
+        font-weight: 700;
+        color: #22c55e;
+    }
+    .level {
+        margin-top: 10px;
+        color: #facc15;
+    }
+    button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        background: #22c55e;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    footer {
+        text-align: center;
+        padding: 30px;
+        color: gray;
+        font-size: 14px;
+    }
+    </style>
+
+</head>
+
+<body>
+    <div id="popup"
+    style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    ">
+    <div style="
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;    
+    ">
+    <p id="popupText"></p>
+<button onclick="closePopup()">OK</button></div>
+</div>
+    <div class="hero">
+        <h1>We Build Websites That Bring Customers</h1>
+        <p>Get A Smart Instant Price Based On Your Business Needs</p>
+        <a class="cta" href="#tool">Get Started</a>
+    </div>
+    <div class="container">
+        <div class="card"> Dilivery (2-5 days)</div>
+        <div class="card"> Mobile Optimised Design</div>
+        <div class="card">$ Sales-Focused Websites</div>
+        <div class="card"> SEO Ready</div>
+        <div class="tool" id="tool">
+            <h2>Instant Website Price Calculator</h2>
+            <p>Describe Your Website And Get A Professional Estimate Instantly</p>
+            <textarea id="desc"
+            
+            placeholder="Example: I Need An E-Commerce Website With Payment, Login, Dashboared, And Admin Panel...."></textarea>
+            <p id="eror"
+            style="color: red;
+            margin-top: 10px;"></p>
+            <div class="price" id="price">N0</div>
+            <div class="level" id="level"></div>
+            <button onclick ="StartProject()">Start Project</button>
+        </div>
+        </div>
+
+        <footer>
+           @ 2026 Web Agency | Built For Serious Businesses
+        </footer>
+        <script>
+            let finalPrice = 0;
+            function analyze() {
+                let text = document.getElementById("desc").value.toLowerCase();
+                let price = 10000;
+                let score = 0;
+
+                const rules = [
+                    {keys:["ecommerce", "store", "shop"], value:30000},
+                    {keys:["payment", "paystack", "stripe"], value:20000},
+                    {keys:["login","signup"], value:20000},
+                    {keys:["dashboard", "admin"], value:20000},
+                    {keys:["api", "integration"], value:20000},
+                    {keys:["chat", "messaging"], value:50000},
+                    {keys:["booking", "appointment"],value:15000},
+                    {keys:["ai", "automation"], value:50000},
+                    {keys:["mobile app"], value:500000},
+                    {keys:["multi vendor", "marketplace"], value:60000},
+                    {keys:["custom design", "ui/ux"], value:15000},
+                    {keys:["survey"], value: 20000}, ]
+            rules.forEach(r => {
+                r.keys.forEach(k => {
+                    if(text.includes(k)){
+                        price += r.value;
+                        score += r.value;
+                    }
+                });
+            });
+            if(text.length > 150) price += 10000;
+            if(text.length > 300) price += 15000;
+            finalPrice = price;
+            document.getElementById("price").innerText = "N" + price.toLocaleString();
+
+            let level = "Basic Project";
+            if(score > 30000) level = "Standard Project";
+            if(score > 70000) level = "Advanced Project";
+            if(score > 300000) level = "Enterprise Project";
+
+            document.getElementById("level").innerText = level;
+            }
+
+            document.getElementById("desc").addEventListener("input", analyze);
+
+         function StartProject() {
+            let description = document.getElementById("desc").value;
+            let phone ="2348069414519";
+            let currentLevel = document.getElementById("level").innerText|| "Basic Prject";
+
+            if (description.trim() === "") {
+                showPopup("Please Describe Your Website First");
+                return;
+            }
+         let message = `Hello, I want to a project!%0A%0A` +
+                       `*Description:* ${description}%0A` +
+                       `*Estimate:* N${finalPrice.toLocaleString()}%0A` +
+                       `Tier:* ${currentLevel}`;
+        let url = "https://wa.me/" + phone +"?text=" + message;
+        window.open(url, "_blank");
+        }
+
+        function showPopup(message) {
+            document.getElementById("popupText").innerText = message;
+            document.getElementById("popup").style.display = "flex";
+        }
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        
+
+        </script>
+</body>
+</html>
